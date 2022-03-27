@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
 
@@ -7,7 +7,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../AddDevice/adddevice.dart';
 import '../Global/global.dart';
+import '../Homepage/homepage.dart';
+import '../Models/usereprofile.dart';
 import '../Widgets/input_filed.dart';
 import '../main.dart';
 
@@ -19,7 +23,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-   bool isVisible = false;
+  bool isVisible = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   static bool isHiddenPassword = true;
   TextEditingController emailController = TextEditingController();
@@ -62,8 +66,8 @@ class _LoginState extends State<Login> {
                                   height: 60.0,
                                 ),
                                 Container(
-                                  padding:
-                                      const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                                  padding: const EdgeInsets.only(
+                                      top: 5.0, bottom: 5.0),
                                   child: const Text(
                                     "Go ahead and Login",
                                     style: TextStyle(
@@ -77,8 +81,8 @@ class _LoginState extends State<Login> {
                                   height: 5.0,
                                 ),
                                 Container(
-                                  padding:
-                                      const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                                  padding: const EdgeInsets.only(
+                                      top: 5.0, bottom: 5.0),
                                   child: const Text(
                                     "It should only take a couple of seconds to login to your account",
                                     style: TextStyle(
@@ -123,16 +127,18 @@ class _LoginState extends State<Login> {
                                   fontFamily: 'Merriweather'),
                             ),
                             const SizedBox(height: 21.0),
-            
+
                             //InputField Widget from the widgets folder
-                            const InputField(label: "Username", content: "a_khanooo"),
-            
+                            const InputField(
+                                label: "Username", content: "a_khanooo"),
+
                             const SizedBox(height: 20.0),
-            
-                            const InputField(label: "Password", content: "********"),
-            
+
+                            const InputField(
+                                label: "Password", content: "********"),
+
                             const SizedBox(height: 20.0),
-            
+
                             Row(
                               children: <Widget>[
                                 const SizedBox(
@@ -166,197 +172,199 @@ class _LoginState extends State<Login> {
             ),
           );
         } else {
-    return Scaffold(
-      backgroundColor: const Color(0xff121421),
-      body: SafeArea(
-        child: Form(
-          key: formKey,
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 28,
-                  right: 18,
-                  top: 36,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return Scaffold(
+            backgroundColor: const Color(0xff121421),
+            body: SafeArea(
+              child: Form(
+                key: formKey,
+                child: ListView(
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        )),
-                    Row(
-                      children: const [
-                        Text("",
-                            style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 28,
+                        right: 18,
+                        top: 36,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
                                 color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(360),
-                      onTap: () {},
-                      child: const SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: Center(
-                            // child: Icon(
-                            //   Icons.notifications,
-                            //   color: Colors.white,
-                            // ),
+                              )),
+                          Row(
+                            children: const [
+                              Text("",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          InkWell(
+                            borderRadius: BorderRadius.circular(360),
+                            onTap: () {},
+                            child: const SizedBox(
+                              height: 35,
+                              width: 35,
+                              child: Center(
+                                  // child: Icon(
+                                  //   Icons.notifications,
+                                  //   color: Colors.white,
+                                  // ),
+                                  ),
                             ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 56,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    const Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OpenSans',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 55,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        // color: Color(0xFF6CA8F1),
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 6.0,
-                            offset: Offset(0, 2),
                           ),
                         ],
                       ),
-                      height: 60.0,
-                      child: TextFormField(
-                        textInputAction: TextInputAction.next,
-                        controller: emailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter email';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                        ),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 14.0),
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: Colors.white,
-                          ),
-                          hintText: 'Email ',
-                          // hintStyle: kHintTextStyle,
-                        ),
-                      ),
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 56,
                     ),
                     Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        // color: Color(0xFF6CA8F1),
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 6.0,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
                       ),
-                      height: 60.0,
-                      child: TextFormField(
-                        controller: passwordController,
-                        textInputAction: TextInputAction.next,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter password';
-                          }
-                          return null;
-                        },
-                        obscureText: isHiddenPassword,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                        ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: const EdgeInsets.only(top: 14.0),
-                          prefixIcon: const Icon(
-                            Icons.security,
-                            color: Colors.white,
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 25,
                           ),
+                          const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'OpenSans',
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 55,
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              // color: Color(0xFF6CA8F1),
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 6.0,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            height: 60.0,
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              controller: emailController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter email';
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'OpenSans',
+                              ),
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top: 14.0),
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  color: Colors.white,
+                                ),
+                                hintText: 'Email ',
+                                // hintStyle: kHintTextStyle,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              // color: Color(0xFF6CA8F1),
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 6.0,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            height: 60.0,
+                            child: TextFormField(
+                              controller: passwordController,
+                              textInputAction: TextInputAction.next,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                                return null;
+                              },
+                              obscureText: isHiddenPassword,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'OpenSans',
+                              ),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding:
+                                    const EdgeInsets.only(top: 14.0),
+                                prefixIcon: const Icon(
+                                  Icons.security,
+                                  color: Colors.white,
+                                ),
 
-                          suffixIcon: InkWell(
-                              onTap: togglePassword,
-                              child: Icon(isHiddenPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off)),
-                          // ) ,
-                          hintText: 'Enter password',
-                        ),
+                                suffixIcon: InkWell(
+                                    onTap: togglePassword,
+                                    child: Icon(isHiddenPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off)),
+                                // ) ,
+                                hintText: 'Enter password',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          buildForgotPasswordBtn(),
+                          _buildLoginBtn()
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    buildForgotPasswordBtn(),
-                    _buildLoginBtn()
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
- 
+            ),
+          );
         }
       },
     );
   }
-    void togglePassword() {
+
+  void togglePassword( ) {
     setState(() {
       isHiddenPassword = !isHiddenPassword;
     });
   }
-    Widget _buildLoginBtn() {
+
+  Widget _buildLoginBtn() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -368,7 +376,9 @@ class _LoginState extends State<Login> {
               isVisible = true;
             });
             await goToNextPage();
-          } else {}
+          } else {
+            throw Exception("Error");
+          }
         },
         padding: const EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -405,7 +415,6 @@ class _LoginState extends State<Login> {
   }
 
   checkDetails() async {
-  
     const url = api + 'api-token-auth/';
 
     var map = <String, dynamic>{};
@@ -422,13 +431,11 @@ class _LoginState extends State<Login> {
       if (kDebugMode) {
         print(all);
       }
-      // await getUid();
-      // await checkUserPlace();
+      await getUid();
+      await checkUserPlace();
     }
 
     if (response.statusCode == 400) {
-      //  final snackBar=SnackBar(content: Text('Login Successful')
-      // Navigator.push(context, MaterialPageRoute(builder: (context)=>WrongPassword()));
       wrongPassword(context);
 
       throw ("Wrong Credentials");
@@ -442,4 +449,269 @@ class _LoginState extends State<Login> {
     }
   }
 
+  Future getUid() async {
+    const uri = api + 'getuid/';
+    String? token = await getToken();
+    final response = await http.get(Uri.parse(uri), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print('UiD ${response.body}');
+      }
+      var getUidVariable = jsonDecode(response.body);
+      int getUidVariable2 = int.parse(getUidVariable.toString());
+      await storeUidSharedPref(getUidVariable2);
+      await getUidShared();
+      await getUserDetails(getUidVariable.toString());
+      if (kDebugMode) {
+        print(getUidVariable2);
+      }
+    } else {
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
+    }
+  }
+
+  storeUidSharedPref(value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt("uid", value);
+  }
+
+  Future getUidShared() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final a = prefs.getInt("uid");
+    setState(() {
+      getUidVariable2 = int.parse(a.toString());
+    });
+    if (kDebugMode) {
+      print("aas $a");
+    }
+  }
+
+  Future<void> getUserDetails(getUidVariable) async {
+    String? token = await getToken();
+
+    String uri = api + "getthedataofuser/?id=" + getUidVariable;
+    final response = await http.get(Uri.parse(uri), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+
+    if (response.statusCode == 200) {
+      var userDataVariable = jsonDecode(response.body);
+    }
+  }
+
+  Future checkUserPlace() async {
+    String? token = await getToken();
+    const url = api + 'addyourplace/';
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List ans = jsonDecode(response.body);
+      if (ans.isEmpty) {
+        print("Empty");
+        await placeName();
+      }
+      await fetchPlace();
+    }
+  }
+
+  Future<void> placeName() async {
+    String? token = await getToken();
+    const url = api + 'addyourplace/';
+    var postData = {"user": getUidVariable2, "p_type": "Farmer Place"};
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Token $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(postData),
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      var placeResponse = jsonDecode(response.body);
+      if (kDebugMode) {
+        print("Place Response $placeResponse");
+      }
+      await sendFloorName(placeResponse.toString());
+    } else {
+      print("Place Response ${response.statusCode}");
+      print("Place Response ${response.body}");
+    }
+  }
+
+  Future<void> sendFloorName(placeResponse) async {
+    String? token = await getToken();
+    const url = api + 'addyourfloor/';
+    var postData = {
+      "user": getUidVariable2,
+      "p_id": placeResponse.toString(),
+      "f_name": "Farmer Floor"
+    };
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Token $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(postData),
+    );
+
+    if (response.statusCode == 201) {
+      var floorResponse = jsonDecode(response.body);
+      if (kDebugMode) {
+        print("floorResponse  $floorResponse");
+      }
+      await sendFlatName(floorResponse.toString());
+    } else {
+      throw Exception('Failed to create Floor.');
+    }
+  }
+
+  var flatResponse;
+  Future<void> sendFlatName(floorResponse) async {
+    String? token = await getToken();
+    const url = api + 'addyourflat/';
+    var postData = {
+      "user": getUidVariable2,
+      "f_id": floorResponse.toString(),
+      "flt_name": "Flat Name"
+    };
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Token $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(postData),
+    );
+
+    if (response.statusCode == 201) {
+      flatResponse = jsonDecode(response.body);
+      if (kDebugMode) {
+        print("Flat Response $flatResponse");
+      }
+      setState(() {
+        isVisible = false;
+      });
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AddDevice(
+                  flatResponse: flatResponse,
+                  getUidVariable2: getUidVariable2,
+                  token: token)));
+    } else {
+      throw Exception('Failed to create Floor.');
+    }
+  }
+
+  Future<void> fetchPlace() async {
+    String? token = await getToken();
+    const url = api + 'addyourplace/';
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List ans = jsonDecode(response.body);
+      await getFloor(ans[0]['p_id'].toString());
+    }
+  }
+
+  Future<void> getFloor(placeId) async {
+    String? token = await getToken();
+    var url = api + "addyourfloor/?p_id=" + placeId.toString();
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List ans = jsonDecode(response.body);
+      await getFlat(ans[0]['f_id'].toString());
+    }
+  }
+
+  Future<void> getFlat(floorId) async {
+    String? token = await getToken();
+    var url = api + "addyourflat/?f_id=" + floorId.toString();
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List ans = jsonDecode(response.body);
+      flatResponse = ans[0]['flt_id'].toString();
+
+      await getRoom(ans[0]['flt_id'].toString());
+    }
+  }
+
+  var roomResponse;
+  Future<void> getRoom(flatId) async {
+    String? token = await getToken();
+    var url = api + "addroom/?flt_id=" + flatId.toString();
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List ans = jsonDecode(response.body);
+      if (ans.isEmpty) {
+        setState(() {
+          isVisible = false;
+        });
+
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddDevice(
+                    flatResponse: flatResponse,
+                    getUidVariable2: getUidVariable2,
+                    token: token)));
+      }
+      setState(() {
+        roomResponse = ans[0]['r_id'].toString();
+      });
+      await getDevice(ans[0]['r_id'].toString());
+    }
+  }
+
+  Future getDevice(roomId) async {
+    String? token = await getToken();
+    var url = api + 'addyourdevice/?r_id=' + roomId.toString();
+    final response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    if (response.statusCode == 200) {
+      List<dynamic> ans = jsonDecode(response.body);
+
+      print(ans);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(
+                    deviceId: ans[0]['d_id'].toString(),
+                    roomId: roomResponse,
+                    flatResponse: flatResponse,
+                  )));
+    }
+  }
 }

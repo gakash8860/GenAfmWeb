@@ -19,7 +19,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool isVisible = false;
-  bool checkPlace = false;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   static bool isHiddenPassword = true;
   SignupData data = SignupData();
@@ -645,7 +645,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.white,
-        child: const Text(
+        child:isVisible?const Center(child: CircularProgressIndicator(),): const Text(
           'SignUp',
           style: TextStyle(
             color: Color(0xFF527DAA),
