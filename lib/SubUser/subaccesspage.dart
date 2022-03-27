@@ -249,254 +249,251 @@ class _SubAccessPageState extends State<SubAccessPage> {
                   title: Container(
                     width: double.infinity,
                     color: Colors.white,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            child: const Icon(
-                              Icons.update,
-                              color: Colors.blueGrey,
-                            ),
-                            onTap: () async {
-                              await getSensorData(deviceId);
-                            },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          child: const Icon(
+                            Icons.update,
+                            color: Colors.blueGrey,
                           ),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Container(
-                            width: 14,
-                            height: 14,
+                          onTap: () async {
+                            await getSensorData(deviceId);
+                          },
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Container(
+                          width: 14,
+                          height: 14,
 
-                            decoration: BoxDecoration(
-                                color:
-                                    statusOfDevice ? Colors.green : Colors.grey,
-                                shape: BoxShape.circle),
-                            // child: ...
+                          decoration: BoxDecoration(
+                              color:
+                                  statusOfDevice ? Colors.green : Colors.grey,
+                              shape: BoxShape.circle),
+                          // child: ...
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             const LocalSensorData()));
+                          },
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.fire,
+                                color: Colors.yellow,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor1.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
                           ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const LocalSensorData()));
-                            },
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                const Icon(
-                                  FontAwesomeIcons.fire,
-                                  color: Colors.yellow,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  sensorData!.sensor1.toStringAsFixed(2),
-                                  style: const TextStyle(
-                                      fontSize: 10, color: Colors.grey),
-                                )
-                              ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
+                            const Icon(
+                              FontAwesomeIcons.cloud,
+                              color: Colors.orange,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor2.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.water,
+                              color: Colors.grey,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor3.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.temperatureLow,
+                              color: Colors.amberAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor4.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.cloudRain,
+                              color: Colors.brown,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor5.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              Icons.electrical_services,
+                              color: Colors.blueAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor6.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              agriculture,
+                              color: Colors.redAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor7.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              MdiIcons.cow,
+                              color: Colors.green,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor8.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            String googleUrl =
+                                'https://www.google.co.in/maps/search/?api=1&query=${sensorData!.sensor9.toString()},${sensorData!.sensor10.toString()}';
+                            if (await canLaunch(googleUrl)) {
+                              await launch(googleUrl);
+                            } else {
+                              throw 'Could not open the map.';
+                            }
+                            print('vv');
+                          },
+                          child: Column(
+                            children: const [
+                              SizedBox(
                                 height: 5,
                               ),
-                              const Icon(
-                                FontAwesomeIcons.cloud,
-                                color: Colors.orange,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor2.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.water,
-                                color: Colors.grey,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor3.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.temperatureLow,
-                                color: Colors.amberAccent,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor4.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.cloudRain,
-                                color: Colors.brown,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor5.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                Icons.electrical_services,
+                              Icon(
+                                Icons.location_on,
                                 color: Colors.blueAccent,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                sensorData!.sensor6.toStringAsFixed(2),
-                                style: const TextStyle(
+                                "Location",
+                                style: TextStyle(
                                     fontSize: 10, color: Colors.grey),
                               )
                             ],
                           ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                agriculture,
-                                color: Colors.redAccent,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor7.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                MdiIcons.cow,
-                                color: Colors.green,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor8.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              String googleUrl =
-                                  'https://www.google.co.in/maps/search/?api=1&query=${sensorData!.sensor9.toString()},${sensorData!.sensor10.toString()}';
-                              if (await canLaunch(googleUrl)) {
-                                await launch(googleUrl);
-                              } else {
-                                throw 'Could not open the map.';
-                              }
-                              print('vv');
-                            },
-                            child: Column(
-                              children: const [
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Icon(
-                                  Icons.location_on,
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Location",
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
