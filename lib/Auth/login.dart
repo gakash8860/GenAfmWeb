@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../AddDevice/adddevice.dart';
 import '../Global/global.dart';
+import '../Homepage/changeindex.dart';
 import '../Homepage/homepage.dart';
 import '../Models/usereprofile.dart';
 import '../Widgets/input_filed.dart';
@@ -49,123 +50,244 @@ class _LoginState extends State<Login> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40.0)),
                   elevation: 5.0,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        height: MediaQuery.of(context).size.height,
-                        color: Colors.lightBlue[600],
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 85.0, right: 50.0, left: 50.0),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Column(
-                              children: <Widget>[
-                                const SizedBox(
-                                  height: 60.0,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      top: 5.0, bottom: 5.0),
-                                  child: const Text(
-                                    "Go ahead and Login",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 30.0,
-                                      fontWeight: FontWeight.w900,
+                  child: Form(
+                    key: formKey,
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3.3,
+                          height: MediaQuery.of(context).size.height,
+                          color: Colors.lightBlue[600],
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 85.0, right: 50.0, left: 50.0),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Column(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    height: 60.0,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5.0),
+                                    child: const Text(
+                                      "Go ahead and Login",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.w900,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5.0,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      top: 5.0, bottom: 5.0),
-                                  child: const Text(
-                                    "It should only take a couple of seconds to login to your account",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
+                               
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5.0),
+                                    child: const Text(
+                                      "It should only take a couple of seconds to login to your account",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 50.0,
-                                ),
-                                FlatButton(
-                                  color: Colors.lightBlue,
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const SignUpScreen();
-                                    }));
-                                  },
-                                  child: const Text(
-                                    "Create Account",
-                                    style: TextStyle(color: Colors.white),
+                                  const SizedBox(
+                                    height: 50.0,
                                   ),
-                                ),
-                              ],
+                                  FlatButton(
+                                    color: Colors.lightBlue,
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return const SignUpScreen();
+                                      }));
+                                    },
+                                    child: const Text(
+                                      "Create Account",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            top: 140.0, right: 70.0, left: 70.0, bottom: 5.0),
-                        child: Column(
-                          children: <Widget>[
-                            const Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.lightBlue,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 35.0,
-                                  fontFamily: 'Merriweather'),
-                            ),
-                            const SizedBox(height: 21.0),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: 140.0, right: 70.0, left: 70.0, bottom: 5.0),
+                          child: Column(
+                            children: <Widget>[
+                              const Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.lightBlue,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 35.0,
+                                    fontFamily: 'Merriweather'),
+                              ),
+                              const SizedBox(height: 21.0),
 
-                            //InputField Widget from the widgets folder
-                            const InputField(
-                                label: "Username", content: "a_khanooo"),
-
-                            const SizedBox(height: 20.0),
-
-                            const InputField(
-                                label: "Password", content: "********"),
-
-                            const SizedBox(height: 20.0),
-
-                            Row(
-                              children: <Widget>[
-                                const SizedBox(
-                                  width: 170.0,
-                                ),
-                                FlatButton(
-                                  color: Colors.grey[200],
-                                  onPressed: () {},
-                                  child: const Text("Cancel"),
-                                ),
-                                const SizedBox(
-                                  width: 20.0,
-                                ),
-                                FlatButton(
-                                  color: Colors.lightBlue,
-                                  onPressed: () {},
-                                  child: const Text(
-                                    "Login",
-                                    style: TextStyle(color: Colors.white),
+                              //InputField Widget from the widgets folder
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 80.0,
+                                    child: const Text(
+                                      "Username",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.lightBlue),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  const SizedBox(
+                                    width: 40.0,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.7,
+                                    color: Colors.blue[50],
+                                    child: TextFormField(
+                                      controller: emailController,
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        hintText: "username",
+                                        fillColor: Colors.blue[50],
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Required";
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 20.0),
+
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 80.0,
+                                    child: const Text(
+                                      "Password",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.lightBlue),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 40.0,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.7,
+                                    color: Colors.blue[50],
+                                    child: TextFormField(
+                                      controller: passwordController,
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        hintText: "Password",
+                                        fillColor: Colors.blue[50],
+                                            suffixIcon: InkWell(
+                                    onTap: togglePassword,
+                                    child: Icon(isHiddenPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off)),
+                                      
+                                      ),
+                                      obscureText: isHiddenPassword,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Required";
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 20.0),
+
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    width: 170.0,
+                                  ),
+                                  FlatButton(
+                                    color: Colors.grey[200],
+                                    onPressed: () {},
+                                    child: const Text("Cancel"),
+                                  ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  FlatButton(
+                                    color: Colors.lightBlue,
+                                    onPressed: () async {
+                                      if (formKey.currentState!.validate()) {
+                                        setState(() {
+                                          isVisible = true;
+                                        });
+                                        await goToNextPage();
+                                      } else {
+                                        throw Exception("Error");
+                                      }
+                                    },
+                                    child: isVisible? const Center(child:  CircularProgressIndicator()) : const Text(
+                                      "Login",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -358,7 +480,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void togglePassword( ) {
+  void togglePassword() {
     setState(() {
       isHiddenPassword = !isHiddenPassword;
     });
@@ -707,10 +829,11 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage(
+              builder: (context) => ChangeIndex(
                     deviceId: ans[0]['d_id'].toString(),
                     roomId: roomResponse,
                     flatResponse: flatResponse,
+                    currentIndex: 0,
                   )));
     }
   }

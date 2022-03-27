@@ -113,85 +113,410 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, right: 70.0, left: 70.0, bottom: 10.0),
-                      child: Column(
-                        children: <Widget>[
-                          const Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                color: Colors.lightBlue,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 35.0,
-                                fontFamily: 'Merriweather'),
-                          ),
-                          const SizedBox(height: 21.0),
+                    Form(
+                      key: formKey,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 15.0, right: 70.0, left: 70.0, bottom: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            const Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  color: Colors.lightBlue,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 35.0,
+                                  fontFamily: 'Merriweather'),
+                            ),
+                            const SizedBox(height: 21.0),
 
-                          //InputField Widget from the widgets folder
-                          InputField(
-                              label: "Full Name",
-                              content: "Full Name",
-                              editingController: nameEditing),
-
-                          const SizedBox(height: 20.0),
-
-                          //Gender Widget from the widgets folder
-                          InputField(
-                              label: "Email",
-                              content: "Email",
-                              editingController: nameEditing),
-
-                          const SizedBox(height: 20.0),
-
-                          //InputField Widget from the widgets folder
-                          const InputField(
-                              label: "Phone", content: "03/04/2000"),
-
-                          const SizedBox(height: 20.0),
-
-                          //InputField Widget from the widgets folder
-                          const InputField(
-                              label: "Email", content: "anything@site.com"),
-
-                          const SizedBox(height: 20.0),
-
-                          const InputField(
-                              label: "Password", content: "********"),
-
-                          const SizedBox(height: 20.0),
-
-                          //Membership Widget from the widgets folder
-                          // Aggrenment(),
-
-                          const SizedBox(
-                            height: 40.0,
-                          ),
-
-                          Row(
-                            children: <Widget>[
-                              const SizedBox(
-                                width: 170.0,
-                              ),
-                              FlatButton(
-                                color: Colors.grey[200],
-                                onPressed: () {},
-                                child: const Text("Cancel"),
-                              ),
-                              const SizedBox(
-                                width: 20.0,
-                              ),
-                              FlatButton(
-                                color: Colors.lightBlue,
-                                onPressed: () {},
-                                child: const Text(
-                                  "Create Account",
-                                  style: TextStyle(color: Colors.white),
+                            //InputField Widget from the widgets folder
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 80.0,
+                                  child: Text(
+                                    "Full Name",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Colors.lightBlue),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                const SizedBox(
+                                  width: 40.0,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.7,
+                                  color: Colors.blue[50],
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Full Name",
+                                      fillColor: Colors.blue[50],
+                                    ),
+                                    onSaved: (value) {
+                                      var fName = value!;
+                                      if (value.contains(" ")) {
+                                        int v = value.indexOf(" ");
+                                        var ans = value.substring(v);
+                                        var first = value.substring(0, v);
+                                        if (kDebugMode) {
+                                          print("vale $ans");
+                                        }
+                                        setState(() {
+                                          data.lName = ans;
+                                          data.fName = first;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          data.fName = value;
+                                          data.lName = " .";
+                                        });
+                                        if (kDebugMode) {
+                                          print("else ${data.lName}");
+                                        }
+                                      }
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter full name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20.0),
+
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 80.0,
+                                  child: Text(
+                                    "Email",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Colors.lightBlue),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40.0,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.7,
+                                  color: Colors.blue[50],
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Email",
+                                      fillColor: Colors.blue[50],
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter email';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (value) {
+                                      setState(() {
+                                        data.email = value!;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20.0),
+
+                            //InputField Widget from the widgets folder
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 80.0,
+                                  child: Text(
+                                    "Phone Number",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Colors.lightBlue),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40.0,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.7,
+                                  color: Colors.blue[50],
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Phone Number",
+                                      fillColor: Colors.blue[50],
+                                    ),
+                                    onSaved: (value) {
+                                      setState(() {
+                                        data.pno = value!;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter mobile';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20.0),
+
+                            //InputField Widget from the widgets folder
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 80.0,
+                                  child: Text(
+                                    "Enter Password",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Colors.lightBlue),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40.0,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.7,
+                                  color: Colors.blue[50],
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "**********",
+                                      suffixIcon: InkWell(
+                                          onTap: togglePassword,
+                                          child: Icon(isHiddenPassword
+                                              ? Icons.visibility
+                                              : Icons.visibility_off)),
+                                      fillColor: Colors.blue[50],
+                                    ),
+                                    onSaved: (value) {
+                                      setState(() {
+                                        data.pno = value!;
+                                      });
+                                    },
+                                    obscureText: isHiddenPassword,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter password';
+                                      } else {
+                                        setState(() {
+                                          data.password = value;
+                                        });
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20.0),
+
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 80.0,
+                                  child: Text(
+                                    "Confirm Password",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Colors.lightBlue),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40.0,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.7,
+                                  color: Colors.blue[50],
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      suffixIcon: InkWell(
+                                          onTap: togglePassword,
+                                          child: Icon(isHiddenPassword
+                                              ? Icons.visibility
+                                              : Icons.visibility_off)),
+                                      hintText: "**********",
+                                      fillColor: Colors.blue[50],
+                                    ),
+                                    obscureText: isHiddenPassword,
+                                    validator: (value) {
+                                      if (value != data.password) {
+                                        if (kDebugMode) {
+                                          print(
+                                              "object $value ->  ${data.password} ");
+                                        }
+                                        return "Password not match";
+                                      }
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter password';
+                                      }
+                                      setState(() {
+                                        data.password2 = value;
+                                      });
+                                      return null;
+                                    },
+                                    onSaved: (value) {
+                                      setState(() {
+                                        data.password2 = value!;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20.0),
+
+                            //Membership Widget from the widgets folder
+                            // Aggrenment(),
+
+                            const SizedBox(
+                              height: 40.0,
+                            ),
+
+                            Row(
+                              children: <Widget>[
+                                const SizedBox(
+                                  width: 170.0,
+                                ),
+                                FlatButton(
+                                  color: Colors.grey[200],
+                                  onPressed: () {},
+                                  child: const Text("Cancel"),
+                                ),
+                                const SizedBox(
+                                  width: 20.0,
+                                ),
+                                FlatButton(
+                                  color: Colors.lightBlue,
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      await goToNextPage();
+                                    } else {
+                                      if (kDebugMode) {
+                                        print("object");
+                                      }
+                                    }
+                                  },
+                                  child: const Text(
+                                    "Create Account",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -486,6 +811,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Icons.security,
                                 color: Colors.white,
                               ),
+
                               // suffixIcon: InkWell(
 
                               // ) ,
@@ -645,16 +971,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.white,
-        child:isVisible?const Center(child: CircularProgressIndicator(),): const Text(
-          'SignUp',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
+        child: isVisible
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : const Text(
+                'SignUp',
+                style: TextStyle(
+                  color: Color(0xFF527DAA),
+                  letterSpacing: 1.5,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
+                ),
+              ),
       ),
     );
   }
@@ -688,6 +1018,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+   void togglePassword( ) {
+    setState(() {
+      isHiddenPassword = !isHiddenPassword;
+    });
   }
 }
 

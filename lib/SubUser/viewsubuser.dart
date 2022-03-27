@@ -32,7 +32,63 @@ class _ViewShowSubuserState extends State<ViewShowSubuser> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth > 600) {
-          return Scaffold();
+                return Scaffold(
+      backgroundColor: const Color(0xff121421),
+      body: SafeArea(
+          child: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 28,
+              right: 18,
+              top: 16,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: (){},
+                  child: Container(),
+                ),
+                Row(
+                  children: const [
+                    Text("SubUsers",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(360),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddSubUser()));
+                  },
+                  child: const SizedBox(
+                    height: 35,
+                    width: 35,
+                    child: Center(
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 35,
+          ),
+          showSUb()
+        ],
+      )),
+    );
+
         }
          return Scaffold(
       backgroundColor: const Color(0xff121421),

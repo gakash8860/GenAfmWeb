@@ -1,7 +1,6 @@
-// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
-
 import 'dart:convert';
 
+import 'package:afm_genorion/Homepage/changeindex.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,23 +14,21 @@ import '../Models/devicemodel.dart';
 import '../Models/roommodel.dart';
 import '../Models/sensor.dart';
 import '../Models/usereprofile.dart';
-import '../SubUser/listofsubaccess.dart';
-import '../SubUser/viewsubuser.dart';
 import '../main.dart';
+import 'homepage.dart';
 
-class HomePage extends StatefulWidget {
-  String? deviceId;
-  String? roomId;
-  String? flatResponse;
-  HomePage({Key? key, this.deviceId, this.roomId, this.flatResponse})
-      : super(key: key);
+class DesktopHome extends StatefulWidget {
+    final String? deviceId;
+  final String? roomId;
+  final String? flatResponse;
+  const DesktopHome({ Key? key,this.deviceId,this.flatResponse,this.roomId }) : super(key: key);
+
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<DesktopHome> createState() => _DesktopHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-  Future? switchFuture;
+class _DesktopHomeState extends State<DesktopHome> {
+   Future? switchFuture;
   bool changeDeviceBool = true;
   SensorData? sensorData;
   Future? sensorVal;
@@ -87,10 +84,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController pinNameController = TextEditingController();
   List<bool> loading = List.filled(12, false);
 
-
-
-
-  @override
+ @override
   void initState() {
     super.initState();
     getUidShared();
@@ -113,110 +107,16 @@ class _HomePageState extends State<HomePage> {
     pinNameController.dispose();
     sensorVal = getSensorData(widget.deviceId.toString());
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-              key: scaffoldKey,
-              backgroundColor: const Color(0xff121421),
-              drawer: Drawer(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  color: const Color(0xff121421),
-                  child: ListView(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Color(0xff669df4), Color(0xff4e80f3)]),
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                            )),
-                        child: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(top: 10, bottom: 10),
-                              ),
-                              CircularProfileAvatar(
-                                '',
-                                child: Image.asset('assets/images/blank.png'),
-                                radius: 60,
-                                elevation: 5,
-                                onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const ProfilePage()));
-                                },
-                                cacheImage: true,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                               Text(
-                                "Hello ${userProfile!.firstName.toString()}",
-                                // 'Hello $name',
-                                style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                        title: const Text(
-                          'Add SubUser / list',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ViewShowSubuser()));
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          FontAwesomeIcons.streetView,
-                          color: Colors.white,
-                        ),
-                        title: const Text(
-                          'SubAccess',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ListOfSubAccess()));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              body: SafeArea(
+      body: SafeArea(
                 child: changeDeviceBool ? customScrollUi() : changeDevice(),
               )
-              );
-        
+      
+    );
   }
-
-  Widget customScrollUi() {
+    Widget customScrollUi() {
     return FutureBuilder(
         future: sensorVal,
         builder: (context, snapshot) {
@@ -254,17 +154,8 @@ class _HomePageState extends State<HomePage> {
                             const SizedBox(
                               width: 15,
                             ),
-                            InkWell(
-                              child: const Icon(
-                                Icons.menu_rounded,
-                                color: Colors.white,
-                              ),
-                              onTap: () =>
-                                  scaffoldKey.currentState!.openDrawer(),
-                            ),
-                            const SizedBox(
-                              width: 25,
-                            ),
+                          
+                         
                             CircularProfileAvatar(
                               '',
                               child: Image.asset(
@@ -324,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           height: 105,
-                          width: MediaQuery.of(context).size.width / 1.5,
+                          width: MediaQuery.of(context).size.width / 4.5,
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -342,6 +233,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Column(
                             children: [
+                             const SizedBox(height: 25,),
                               TextButton(
                                 onPressed: () {
                                   optionForChoose();
@@ -374,254 +266,251 @@ class _HomePageState extends State<HomePage> {
                   title: Container(
                     width: double.infinity,
                     color: Colors.white,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          InkWell(
-                            child: const Icon(
-                              Icons.update,
-                              color: Colors.blueGrey,
-                            ),
-                            onTap: () async {
-                              await getSensorData(deviceIdForScroll);
-                            },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          child: const Icon(
+                            Icons.update,
+                            color: Colors.blueGrey,
                           ),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Container(
-                            width: 14,
-                            height: 14,
+                          onTap: () async {
+                            await getSensorData(deviceIdForScroll);
+                          },
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Container(
+                          width: 14,
+                          height: 14,
 
-                            decoration: BoxDecoration(
-                                color:
-                                    statusOfDevice ? Colors.green : Colors.grey,
-                                shape: BoxShape.circle),
-                            // child: ...
+                          decoration: BoxDecoration(
+                              color:
+                                  statusOfDevice ? Colors.green : Colors.grey,
+                              shape: BoxShape.circle),
+                          // child: ...
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             const LocalSensorData()));
+                          },
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.fire,
+                                color: Colors.yellow,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor1.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
                           ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const LocalSensorData()));
-                            },
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                const Icon(
-                                  FontAwesomeIcons.fire,
-                                  color: Colors.yellow,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  sensorData!.sensor1.toStringAsFixed(2),
-                                  style: const TextStyle(
-                                      fontSize: 10, color: Colors.grey),
-                                )
-                              ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
+                            const Icon(
+                              FontAwesomeIcons.cloud,
+                              color: Colors.orange,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor2.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.water,
+                              color: Colors.grey,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor3.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.temperatureLow,
+                              color: Colors.amberAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor4.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              FontAwesomeIcons.cloudRain,
+                              color: Colors.brown,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor5.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              Icons.electrical_services,
+                              color: Colors.blueAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor6.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              agriculture,
+                              color: Colors.redAccent,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor7.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Icon(
+                              MdiIcons.cow,
+                              color: Colors.green,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              sensorData!.sensor8.toStringAsFixed(2),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 45,
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            String googleUrl =
+                                'https://www.google.co.in/maps/search/?api=1&query=${sensorData!.sensor9.toString()},${sensorData!.sensor10.toString()}';
+                            if (await canLaunch(googleUrl)) {
+                              await launch(googleUrl);
+                            } else {
+                              throw 'Could not open the map.';
+                            }
+                            print('vv');
+                          },
+                          child: Column(
+                            children: const [
+                              SizedBox(
                                 height: 5,
                               ),
-                              const Icon(
-                                FontAwesomeIcons.cloud,
-                                color: Colors.orange,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor2.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.water,
-                                color: Colors.grey,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor3.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.temperatureLow,
-                                color: Colors.amberAccent,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor4.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.cloudRain,
-                                color: Colors.brown,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor5.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                Icons.electrical_services,
+                              Icon(
+                                Icons.location_on,
                                 color: Colors.blueAccent,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                sensorData!.sensor6.toStringAsFixed(2),
-                                style: const TextStyle(
+                                "Location",
+                                style: TextStyle(
                                     fontSize: 10, color: Colors.grey),
                               )
                             ],
                           ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                agriculture,
-                                color: Colors.redAccent,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor7.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Icon(
-                                MdiIcons.cow,
-                                color: Colors.green,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                sensorData!.sensor8.toStringAsFixed(2),
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              String googleUrl =
-                                  'https://www.google.co.in/maps/search/?api=1&query=${sensorData!.sensor9.toString()},${sensorData!.sensor10.toString()}';
-                              if (await canLaunch(googleUrl)) {
-                                await launch(googleUrl);
-                              } else {
-                                throw 'Could not open the map.';
-                              }
-                              print('vv');
-                            },
-                            child: Column(
-                              children: const [
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Icon(
-                                  Icons.location_on,
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Location",
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -1840,10 +1729,11 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage(
+                              builder: (context) => ChangeIndex(
                                     deviceId: selectedDevice,
                                     roomId: selectedRoom.toString(),
                                     flatResponse: widget.flatResponse,
+                                    currentIndex: 0,
                                   )));
                     } else {
                       setState(() {
@@ -1908,10 +1798,10 @@ class _HomePageState extends State<HomePage> {
               color: Colors.transparent,
               height: MediaQuery.of(context).size.height * 1.55,
               child: GridView.count(
-                crossAxisSpacing: 2, //8
-                childAspectRatio: 2 / 1.8,
-                mainAxisSpacing: 4,
-                crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+              childAspectRatio: 2 / 1.8,
+              mainAxisSpacing: 4,
+              crossAxisCount: 4,
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 children: List.generate(12, (index) {
@@ -2345,6 +2235,5 @@ class _HomePageState extends State<HomePage> {
       pinNameController.clear();
     } else {}
   }
-
 
 }

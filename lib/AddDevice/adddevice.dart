@@ -26,13 +26,244 @@ class _AddDeviceState extends State<AddDevice> {
   TextEditingController addDeviceController = TextEditingController();
   TextEditingController addRoomController = TextEditingController();
   var roomResponse;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth > 600) {
-          return Container();
+          return Scaffold(
+            backgroundColor: Colors.blue[50],
+            body: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 60.0, bottom: 60.0, left: 120.0, right: 120.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40.0)),
+                  elevation: 5.0,
+                  child: Form(
+                    key: formKey,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3.3,
+                          height: MediaQuery.of(context).size.height,
+                          color: Colors.lightBlue[600],
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 85.0, right: 50.0, left: 50.0),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 60.0,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5.0),
+                                    child: const Text(
+                                      "Go ahead and Add Device",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5.0),
+                                    child: const Text(
+                                      "It should only take a couple of seconds to Add Device",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 50.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: 140.0, right: 70.0, left: 70.0, bottom: 5.0),
+                          child: Column(
+                            children: [
+                              const Text(
+                                "Add Device",
+                                style: TextStyle(
+                                    color: Colors.lightBlue,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 35.0,
+                                    fontFamily: 'Merriweather'),
+                              ),
+                              const SizedBox(height: 21.0),
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 80.0,
+                                    child: const Text(
+                                      "Field Name",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(color: Colors.lightBlue),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 40.0,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.7,
+                                    color: Colors.blue[50],
+                                    child: TextFormField(
+                                      controller: addRoomController,
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        hintText: "Field Name",
+                                        fillColor: Colors.blue[50],
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Required";
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20.0),
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 80.0,
+                                    child: const Text(
+                                      "Device Id",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(color: Colors.lightBlue),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 40.0,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.7,
+                                    color: Colors.blue[50],
+                                    child: TextFormField(
+                                      controller: addDeviceController,
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        hintText: "Device Id",
+                                        fillColor: Colors.blue[50],
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Required";
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20.0),
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    width: 170.0,
+                                  ),
+                                  FlatButton(
+                                    color: Colors.grey[200],
+                                    onPressed: () {},
+                                    child: const Text("Cancel"),
+                                  ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  FlatButton(
+                                    color: Colors.lightBlue,
+                                    onPressed: () async {
+                                      if (formKey.currentState!.validate()) {
+                                        setState(() {
+                                          isVisible = true;
+                                        });
+                                        await sendRoomName(
+                                            widget.flatResponse.toString(),
+                                            addRoomController.text.toString());
+                                      } else {
+                                        throw Exception("Error");
+                                      }
+                                    },
+                                    child: isVisible
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : const Text(
+                                            "Add",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
         } else {
           return Scaffold(
             backgroundColor: const Color(0xff121421),
