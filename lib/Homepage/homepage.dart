@@ -15,6 +15,7 @@ import '../Models/devicemodel.dart';
 import '../Models/roommodel.dart';
 import '../Models/sensor.dart';
 import '../Models/usereprofile.dart';
+import '../SSID/showssid.dart';
 import '../SubUser/listofsubaccess.dart';
 import '../SubUser/viewsubuser.dart';
 import '../main.dart';
@@ -295,11 +296,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => ShowSSid(
-                                    //             deviceId: widget.deviceId)));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ShowSSid(
+                                                deviceId: widget.deviceId)));
                                   },
                                   child: Text(
                                     greets.toString(),

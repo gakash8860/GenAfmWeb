@@ -97,7 +97,11 @@ class _SubAccessPageState extends State<SubAccessPage> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth > 600) {
-          return Scaffold();
+        return Scaffold(
+        backgroundColor: const Color(0xff121421),
+        body: SafeArea(
+          child: changeDeviceBool ? customScrollUiWeb() : changeDevice(),
+        ));
         } else {
     return Scaffold(
         backgroundColor: const Color(0xff121421),
@@ -212,6 +216,419 @@ class _SubAccessPageState extends State<SubAccessPage> {
                           ),
                           child: Column(
                             children: [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                    "Assigned By ${widget.ownerName.toString()}"),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    deviceVal = null;
+
+                                    roomVal = getRoomForChange(widget.flatId ??
+                                        flatResponse.toString());
+                                    changeDeviceBool = !changeDeviceBool;
+                                  });
+                                },
+                                child: Text(
+                                    rm[0].rName.toString()),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverAppBar(
+                  backgroundColor: Colors.white,
+                  automaticallyImplyLeading: false,
+                  floating: true,
+                  pinned: true,
+                  title: Container(
+                    width: double.infinity,
+                    color: Colors.white,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            child: const Icon(
+                              Icons.update,
+                              color: Colors.blueGrey,
+                            ),
+                            onTap: () async {
+                              await getSensorData(deviceId);
+                            },
+                          ),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          Container(
+                            width: 14,
+                            height: 14,
+
+                            decoration: BoxDecoration(
+                                color:
+                                    statusOfDevice ? Colors.green : Colors.grey,
+                                shape: BoxShape.circle),
+                            // child: ...
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const LocalSensorData()));
+                            },
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const Icon(
+                                  FontAwesomeIcons.fire,
+                                  color: Colors.yellow,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  sensorData!.sensor1.toStringAsFixed(2),
+                                  style: const TextStyle(
+                                      fontSize: 10, color: Colors.grey),
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.cloud,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor2.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.water,
+                                color: Colors.grey,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor3.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.temperatureLow,
+                                color: Colors.amberAccent,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor4.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                FontAwesomeIcons.cloudRain,
+                                color: Colors.brown,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor5.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                Icons.electrical_services,
+                                color: Colors.blueAccent,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor6.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                agriculture,
+                                color: Colors.redAccent,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor7.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                MdiIcons.cow,
+                                color: Colors.green,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                sensorData!.sensor8.toStringAsFixed(2),
+                                style: const TextStyle(
+                                    fontSize: 10, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              String googleUrl =
+                                  'https://www.google.co.in/maps/search/?api=1&query=${sensorData!.sensor9.toString()},${sensorData!.sensor10.toString()}';
+                              if (await canLaunch(googleUrl)) {
+                                await launch(googleUrl);
+                              } else {
+                                throw 'Could not open the map.';
+                              }
+                              print('vv');
+                            },
+                            child: Column(
+                              children: const [
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.blueAccent,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Location",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.grey),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                  if (index < 1) {
+                    if (dv.isEmpty) {
+                      return Container(
+                        color: Colors.blue,
+                        height: 45,
+                      );
+                    }
+
+                    return deviceContainer(widget.dId ?? deviceId.toString());
+                  }
+                  return null;
+                  // return Container();
+                }))
+              ],
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
+  }
+
+    Widget customScrollUiWeb() {
+    return FutureBuilder(
+        future: sensorVal,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.greenAccent,
+                            Color.fromARGB(255, 242, 243, 245)
+                          ]),
+                      color: Color.fromARGB(255, 233, 216, 67),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        // bottomLeft: Radius.circular(30),
+                        // bottomRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            const SizedBox(
+                              width: 25,
+                            ),
+                            CircularProfileAvatar(
+                              '',
+                              child: Image.asset(
+                                'assets/images/genLogo.png',
+                                fit: BoxFit.cover,
+                              ),
+                              radius: 30,
+                              elevation: 5,
+                              onTap: () {},
+                              cacheImage: true,
+                            ),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(
+                                  greets.toString(),
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(179, 85, 84, 84)),
+                                ),
+                                // Container(
+                                //     margin: const EdgeInsets.only(right: 35),
+                                //     child: Text(
+                                //       "Assigned By ${widget.ownerName.toString()}",
+                                //       style: const TextStyle(
+                                //           color:
+                                //               Color.fromARGB(179, 85, 84, 84)),
+                                //     ))
+                              ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        Container(
+                          height: 105,
+                          width: MediaQuery.of(context).size.width / 4.5,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color.fromARGB(255, 194, 204, 221),
+                                  Color.fromARGB(255, 213, 221, 238)
+                                ]),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                                                const SizedBox(height: 25,),
                               TextButton(
                                 onPressed: () {},
                                 child: Text(
@@ -522,11 +939,12 @@ class _SubAccessPageState extends State<SubAccessPage> {
   }
 
 
+
     Widget deviceContainer(dId) {
     deviceIdForScroll = dId;
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height * 1.45,
+      height: MediaQuery.of(context).size.height * 1.65,
       child: SingleChildScrollView(
         // controller: scrollController,
         child: Column(
@@ -553,12 +971,12 @@ class _SubAccessPageState extends State<SubAccessPage> {
             ),
             Container(
               color: Colors.transparent,
-              height: MediaQuery.of(context).size.height * 1.35,
+              height: MediaQuery.of(context).size.height * 1.55,
               child: GridView.count(
-                crossAxisSpacing: 2, //8
-                childAspectRatio: 2 / 1.8,
-                mainAxisSpacing: 4,
-                crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+              childAspectRatio: 2 / 1.8,
+              mainAxisSpacing: 4,
+              crossAxisCount: 4,
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 children: List.generate(12, (index) {
