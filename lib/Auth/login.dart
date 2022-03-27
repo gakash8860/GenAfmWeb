@@ -275,7 +275,7 @@ class _LoginState extends State<Login> {
                                         throw Exception("Error");
                                       }
                                     },
-                                    child: isVisible? const Center(child:  CircularProgressIndicator()) : const Text(
+                                    child: isVisible? const Center(child:  CircularProgressIndicator(color: Colors.lightGreenAccent)) : const Text(
                                       "Login",
                                       style: TextStyle(color: Colors.white),
                                     ),
