@@ -11,9 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../AddDevice/adddevice.dart';
 import '../Global/global.dart';
 import '../Homepage/changeindex.dart';
-import '../Homepage/homepage.dart';
-import '../Models/usereprofile.dart';
-import '../Widgets/input_filed.dart';
+
 import '../main.dart';
 
 class Login extends StatefulWidget {
