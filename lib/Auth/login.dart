@@ -534,7 +534,7 @@ class _LoginState extends State<Login> {
     await checkDetails();
   }
 
-  checkDetails() async {
+ Future checkDetails() async {
     const url = api + 'api-token-auth/';
 
     var map = <String, dynamic>{};
