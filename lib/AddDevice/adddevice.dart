@@ -167,6 +167,7 @@ class _AddDeviceState extends State<AddDevice> {
                               Row(
                                 children: <Widget>[
                                   Container(
+                                    color: Colors.transparent,
                                     width: 80.0,
                                     child: const Text(
                                       "Device Id",
